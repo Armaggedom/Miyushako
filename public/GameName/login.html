@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script src="../socket.io/socket.io.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <main>
+        <h1>Login</h1> 
+        <div class="alternative">
+            <span>-</span>
+        </div>
+
+        <form  >
+            <label for="username">
+                <span>Name</span>
+                <input type="text" id="username">
+            </label>
+            <label for="password">
+                <span>Password</span>
+                <input type="password" id="password">
+            </label>
+
+            <input type="button" value="Login" id="button" onclick="loginRequest()">
+        </form>
+    </main>
+    <section class="images">
+        <!-- <img src="assets/mobile.svg" alt="Mobile"> -->
+        <div class="circle"></div>
+    </section>
+    <script>
+        const socket=io()
+        socket.on('connect', ()=>{return console.log('client request accepted')})
+        //request login
+        function loginRequest() {
+            var args=document.getElementById("username").value+','+document.getElementById("password").value
+            socket.emit('loginRequest', args)
+        }
+        //recive reply
+        socket.on('loginReply', (args)=>{
+            if(args=='dennied') {alert('usuário ou senha incorreta')}
+            else if(args=='granted') {
+                alert('login efetuado')
+                var btn=document.querySelector('#button')
+                btn=addEventListener('click', function() {
+                    var username=document.querySelector('#username').value
+                    var password=document.querySelector('#password').value
+                    localStorage.setItem('username', username)
+                    localStorage.setItem('password', password)
+                })
+                
+            }
+            else {alert('error undefined')}
+        })
+    </script>
+</body>
+</html>           

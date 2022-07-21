@@ -1,0 +1,68 @@
+html {
+	margin: 1%;
+	font-family: monospace;
+}
+body {
+	background-color: #000000;
+	display: inline;
+	margin-inline: 12px;
+}
+#leftbar {
+	float: left;
+	width: auto;
+	height: auto;
+	padding: 1%;
+	background-color: #292828;
+	border-style: solid;
+	border-color: darkgray;
+}
+#rightbar {
+	float: left;
+	width: 12%;
+	height: auto;
+	padding: 1%;
+	background-color: #292828;
+	border-style: solid;
+	border-color: darkgray;
+}
+#nameBox {
+	resize: none;
+	width: auto;
+	height: 15px;
+}
+.finish {
+	margin-top: 10px;
+	height: auto;
+	border: double;
+	border-width: 5px;
+}
+.alignBox {
+	display: inline-table;
+	margin-right: 15%;
+}
+.inputbox {
+	border: double;
+	border-width: 5px;
+}
+.title {
+	text-align: center;
+}
+.navPadding {
+	color: #ffffff;
+}
+#main {
+	float: left;
+	width: auto;
+	height: auto;
+	padding: 1%;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: #292828;
+	border-style: solid;
+	border-color: darkgray;
+	color: #ffffff;
+}
+.hyperlink {
+	text-decoration: none;
+	color: gray;
+}

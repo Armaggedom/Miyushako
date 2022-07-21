@@ -1,0 +1,132 @@
+<!-- LIST
+* DATABASE development
+	- codeX
+	- sequencial
+	- linker 
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta lang="us">
+	<!-- <meta http-equiv="refresh" content="1"> -->
+	<link rel="stylesheet" type="text/css" href="./main.css">
+	<script src="./socket.io/socket.io.js"></script>
+	<title> [development] </title>
+</head>
+<body>
+	<nav id="leftbar">
+		<div class="navPadding">
+			<h1 class="title"> Character Info </h1>
+			<h2 style="color: red;">nonexistent</h2>
+			<h1>--------------</h1>
+			<h2><a href="./GameName/login.html" class="hyperlink">login</a></h2>
+		</div>
+		<h6 style="text-align: right;">V:0.0.1</h6>
+	</nav>		
+	<main id="main">
+		<h1>Create character</h1>
+		<h3> Info: ao criar seu personagem algumas informações não poderão ser mudadas</h3>
+		<h4>
+			<form>
+				<ul>
+					<li class="alignBox">
+						<h3>Dificult:</h3>
+						<input type="radio" name="dificult" disabled="true" />
+						<label>Easy</label><br>
+						<input type="radio" name="dificult" checked="true" disabled="true" />
+						<label>Medium (locked)</label><br>
+						<input type="radio" name="dificult" disabled="true" />
+						<label>Hard</label><br>
+					</li>
+					<li class="alignBox">
+						<h3>Gender:</h3>
+						<input type="radio" name="gender" id="G1" value="Male" />
+						<label>Male</label><br>
+						<input type="radio" name="gender" id="G2" value="Female" />
+						<label>Female</label><br>
+					</li>
+					<li class="alignBox">
+						<h3>Class: </h3>
+						<input type="radio" name="caracter" id="C1" value="Warrior" >
+						<label>Warrior</label><br>
+						<input type="radio" name="caracter" id="C2" value="Hunter" >
+						<label>Hunter</label><br>
+						<input type="radio" name="caracter" id="C3" value="Mage" >
+						<label>Mage</label><br>
+						<input type="radio" name="caracter" id="C4" value="Assasin" >
+						<label>Assasin</label><br>
+						<input type="radio" name="caracter" id="C5" value="healer" >
+						<label>healer</label><br>
+						<input type="radio" name="caracter" id="C6" value="Paladin" >
+						<label>Paladin</label><br>
+						<input type="radio" name="caracter" id="C7" value="Sorcerer" >
+						<label>Sorcerer</label><br>
+					</li>
+					<li class="alignBox">
+						<h3>Body size: </h3>
+						<input type="radio" name="body" id="B1" value="tiny" disabled="true">
+						<label>tiny</label><br>
+						<input type="radio" name="body" id="B2" value="small">
+						<label>small</label><br>
+						<input type="radio" name="body" id="B3" value="normal">
+						<label>normal</label><br>
+						<input type="radio" name="body" id="B4" value="high">
+						<label>high</label><br>
+					</li>
+					<li class="alignBox">
+						<input class="inputbox" id="nameBox" name="nome" placeholder="nickname" required></input>
+					</li>
+					<li class="alignBox">
+						<input type="password" class="inputbox" id="passwordBox" name="nome" placeholder="password" required></input>
+					</li>
+					<li class="alignBox">
+						<input type="submit" class="finish" value="enviar" onclick="create()"></input>
+					</li>
+				</ul>
+			</form>
+			<script>
+				const socket=io()
+				socket.on('connect', ()=>{return console.log('client request accepted')}) 
+				socket.on('reciveMessageRegister', (args)=>{return alert(args)})
+				function create() {
+					var validation=true;
+					var gender=['G1', 'G2']
+					var clas=['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7']
+					var body=['B1', 'B2', 'B3', 'B4']
+					var arg=gendder()+','+claas()+','+boody()+','+nick()+','+password()
+					//validate
+					const array=arg.split(',')
+					for(var i=0; i<array.length; i++){
+						if(array[i]=='undefined' || array[i]==' ') {
+							alert('ocorreu um problema na criação do personagem, prencha todos os campos')
+							return validation=false
+						}
+					}
+					//send character to server
+					if(validation===true) {
+						console.log(document.getElementById('passwordBox').value)
+						socket.emit('docs', arg.toString()) // send string
+						console.log('create character send')
+						console.log(array)
+					}
+					//push data
+					function gendder() {for(var i=0; i<gender.length; i++) {if(document.getElementById(gender[i]).checked===true) {return document.getElementById(gender[i]).value}}}
+					function claas(){for(var i=0; i<clas.length; i++) {if(document.getElementById(clas[i]).checked===true) {return document.getElementById(clas[i]).value}}}
+					function boody() {for(var i=0; i<body.length; i++) {if(document.getElementById(body[i]).checked===true) {return document.getElementById(body[i]).value}}}
+					function nick() {return document.getElementById('nameBox').value}
+					function password() {return document.getElementById('passwordBox').value}
+				}
+				//end script
+			</script>
+		</font>
+		</h4>
+	</main>
+	<nav id="rightbar">
+		<div class="navPadding">
+			<h1 class="title"> Class info </h1>
+			<h3>some classes can receive modifiers which means they can change to a similar class depending on the player's level or weapon. EX: mage can become an elementalist or a wizard</h3>
+		</div>
+	</nav>
+</body>
+</html>
