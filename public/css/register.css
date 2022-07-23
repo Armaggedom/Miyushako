@@ -14,11 +14,9 @@ main {
 	background-color: #000000;
 	float: left;
 	min-height: 34vw;
-	height: calccalc(100px - 34vw);
+	height: calc(1000px - 34vw);
 }
-main div {
-	display: inline-block;
-}
+main div {display: inline-block;}
 main form {
     display: flex;
     flex-direction: column;
@@ -29,23 +27,13 @@ main form label {
     flex-direction: column;
 }
 main form input {}
-
-.character {
-	margin: 1vh;
-}
-.name {
-	margin-right: 1vw;
-}
+.name {margin-right: 1vw;}
 .alignBox {
 	display: inline-table;
 	margin-right: 15%;
 }
-#inputarea {
-	display: block;
-}
-.labelform {
-	display: inline;
-}
+#inputarea {display: block;}
+.labelform {display: inline;}
 #title{text-align: center;}
 #line {
 	border-left: 6px dashed darkred;
