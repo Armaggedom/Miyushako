@@ -3,8 +3,8 @@
 * Developer
 	- Bombbom
  -------------------
-* anti undefined
-* 
+* Credits
+* thanks Kashi for making our login screen design 
 */
 const miyu=require('./models/miyu.js')
 const Profile=require('./models/profile.js')

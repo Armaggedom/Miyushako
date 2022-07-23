@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <script src="../socket.io/socket.io.js"></script>
+    <script src="./socket.io/socket.io.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Form</title>
-    <link rel="stylesheet" href="../css/login.css">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
 </head>
 <body>
     <main>
@@ -15,7 +15,7 @@
             <span>-</span>
         </div>
 
-        <form  >
+        <form>
             <label for="username">
                 <span>Name</span>
                 <input type="text" id="username">
@@ -24,8 +24,14 @@
                 <span>Password</span>
                 <input type="password" id="password">
             </label>
-
-            <input type="button" value="Login" id="button" onclick="loginRequest()">
+            <ul>
+                <li style="display: inline-block;">
+                    <input type="button" value="Login" id="button" onclick="loginRequest()">
+                </li>
+                <li style="display: inline-block;">
+                    <input type="button" value="register" id="button" onclick="registerSwitch()">
+                </li>
+            </ul>
         </form>
     </main>
     <section class="images">
@@ -36,6 +42,7 @@
         const socket=io()
         socket.on('connect', ()=>{return console.log('client request accepted')})
         //request login
+        function registerSwitch() {window.location.replace('./register.html')}
         function loginRequest() {
             var args=document.getElementById("username").value+','+document.getElementById("password").value
             socket.emit('loginRequest', args)
