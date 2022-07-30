@@ -13,8 +13,6 @@
 ## Status:
 <img src="https://img.shields.io/static/v1?label=Status&message=OFFLINE&color=red&style=plastic" />
 
-![GitHub package.json compatible (subfolder of monorepo)](https://img.shields.io/github/package-json/v/Armaggedom/miyuDevelopment?color=lightgrey&filename=package.json&style=plastic)
-
 ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/Armaggedom/miyuDevelopment?color=purple&filename=package.json&style=plastic)
 
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Armaggedom/miyuDevelopment?style=plastic)
@@ -34,6 +32,8 @@
     - pequenas atualizações e correções
 - V:0.2.2Build1:
     - protótipo da página do jogo
+- V:0.2.2Build2:
+    - modificações e otmizações do código
 ```
 ---
 # Area do desenvolvedor
