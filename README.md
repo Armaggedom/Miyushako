@@ -32,6 +32,8 @@
     - pequenas atualizações e correções
 - V:0.2.2Build1:
     - protótipo da página do jogo
+- V:0.2.2Build2:
+    - modificações e otmizações do código
 ```
 ---
 # Area do desenvolvedor
