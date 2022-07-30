@@ -10,7 +10,7 @@ const profile=db.define('profile', {
 		type: Sequelize.STRING,
 		allowNull: false
 	},
-	class: {
+	affinity: {
 		type: Sequelize.STRING,
 		allowNull: false
 	},

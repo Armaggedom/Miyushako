@@ -29,7 +29,7 @@
                     <input type="button" value="Login" id="button" onclick="loginRequest()">
                 </li>
                 <li style="display: inline-block;">
-                    <input type="button" value="register" id="button" onclick="registerSwitch()">
+                    <input id="buttonP" type="button" value="register" id="button" onclick="registerSwitch()">
                 </li>
             </ul>
         </form>
@@ -45,6 +45,7 @@
         function registerSwitch() {window.location.replace('./register.html')}
         function loginRequest() {
             var args=document.getElementById("username").value+','+document.getElementById("password").value
+            socket.emit('storeClientInfo', {customId:document.getElementById('username').value})
             socket.emit('loginRequest', args)
         }
         //recive reply
@@ -52,14 +53,10 @@
             if(args=='dennied') {alert('usuário ou senha incorreta')}
             else if(args=='granted') {
                 alert('login efetuado')
-                var btn=document.querySelector('#button')
-                btn=addEventListener('click', function() {
-                    var username=document.querySelector('#username').value
-                    var password=document.querySelector('#password').value
-                    localStorage.setItem('username', username)
-                    localStorage.setItem('password', password)
-                })
-                
+                var username=document.querySelector('#username').value
+                var password=document.querySelector('#password').value
+                localStorage.setItem('username', username)
+                localStorage.setItem('password', password)
             }
             else {alert('error undefined')}
         })

@@ -8,9 +8,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./socket.io/socket.io.js"></script>
-    <!-- <meta http-equiv="refresh" content="1"> -->
     <link rel="stylesheet" type="text/css" href="./css/register.css">
-    <title></title>
+    <title>Create character</title>
 </head>
 <body>
     <main>
@@ -32,88 +31,38 @@
         <form>
             <ul>
                 <li class="alignBox">
-                    <h3>Dificult:</h3>
-                    <div id="inputarea">
-                        <label class="labelform">
-                            Easy: 
-                            <input type="radio" name="dificult" disabled="true" />
-                        </label><br>
-                        <label class="labelform">
-                             Medium (locked): 
-                            <input type="radio" name="dificult" checked="true" disabled="true" />
-                        </label><br>
-                        <label class="labelform">
-                            Hard: 
-                            <input type="radio" name="dificult" disabled="true" />
-                        </label><br>
-                    </div>
-                    </li>
                     <li class="alignBox">
                         <h3>Gender:</h3>
                         <div id="inputarea">
-                            <label class="labelform">
-                                Male: 
-                                <input type="radio" name="gender" id="G1" value="Male" />
-                        </label><br>
-                        <label class="labelform">
-                            Female: 
-                            <input type="radio" name="gender" id="G2" value="Female" />
-                        </label class="labelform"><br>
-                            
+                            <select name="gender" id="gender" class="selectform">
+                                <option disabele selected value="0"> -- options</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>              
                     </div>
                 </li>
                 <li class="alignBox">
                     <h3>Class: </h3>
                     <div id="inputarea">
-                        <label class="labelform">
-                            Warrior: 
-                            <input type="radio" name="caracter" id="C1" value="Warrior">
-                        </label><br>
-                        <label class="labelform">
-                            Hunter: 
-                            <input type="radio" name="caracter" id="C2" value="Hunter">
-                        </label><br>
-                        <label class="labelform">
-                            Mage: 
-                            <input type="radio" name="caracter" id="C3" value="Mage">
-                        </label><br>
-                        <label class="labelform">
-                            Assasin: 
-                            <input type="radio" name="caracter" id="C4" value="Assasin">
-                        </label><br>
-                        <label class="labelform">
-                            healer: 
-                            <input type="radio" name="caracter" id="C5" value="healer">
-                        </label><br>
-                        <label class="labelform">
-                            Paladin: 
-                            <input type="radio" name="caracter" id="C6" value="Paladin">
-                        </label><br>
-                        <label class="labelform">
-                            Sorcerer: 
-                            <input type="radio" name="caracter" id="C7" value="Sorcerer">
-                        </label><br>  
+                        <select name="affinity" id="affinity" class="selectform">
+                            <option disabele selected value="0"> -- options</option>
+                            <option value="magic art">magic art</option>
+                            <option value="meele combat">meele combat</option>
+                            <option value="demon art">demon art</option>
+                            <option value="sword combat">sword combat</option>
+                        </select>  
                     </div>
                 </li>
                 <li class="alignBox">
                     <h3>Body size: </h3>
                     <div id="inputarea">
-                        <label class="labelform">
-                            tiny:
-                            <input type="radio" name="body" id="B1" value="tiny" disabled="true">    
-                        </label><br>
-                        <label class="labelform">
-                            small:
-                            <input type="radio" name="body" id="B2" value="small">
-                        </label><br>
-                        <label class="labelform">
-                            normal:
-                            <input type="radio" name="body" id="B3" value="normal">
-                        </label><br>
-                        <label class="labelform">
-                            high:
-                            <input type="radio" name="body" id="B4" value="high">
-                        </label><br>
+                        <select name="body" id="body" class="selectform">
+                            <option disabele selected value="0"> -- options</option>
+                            <option value="tiny">tiny</option>
+                            <option value="small">small</option>
+                            <option value="normal">normal</option>
+                            <option value="high">high</option>
+                     </select>
                     </div>
                 </li>
             </ul>
@@ -123,18 +72,23 @@
     <script>
         const socket=io()
         socket.on('connect', ()=>{return console.log('client request accepted')}) 
-        socket.on('reciveMessageRegister', (args)=>{return alert(args)})
+        socket.on('reciveMessageRegister', (args)=>{
+            //error???
+            if(args=='granted') {
+                window.location.replace('./login.html')
+            }
+            else {
+                return alert('An error has occurred, if this persists, please contact us.')
+            }
+        })
         function loginSwitch() {window.location.replace('./login.html')}
         function createRequest() {
             var validation=true;
-            var gender=['G1', 'G2']
-            var clas=['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7']
-            var body=['B1', 'B2', 'B3', 'B4']
-            var arg=gendder()+','+claas()+','+boody()+','+nick()+','+password()
+            var arg=gendder()+','+affin()+','+boody()+','+nick()+','+password()
             //validate
             const array=arg.split(',')
             for(var i=0; i<array.length; i++){
-                if(array[i]=='undefined' || array[i]==' ') {
+                if(array[i]=='undefined' || array[i]==' ' || array[i]==0 || array[i]=='0') {
                     alert('ocorreu um problema na criação do personagem, prencha todos os campos')
                     return validation=false
                 }
@@ -145,13 +99,13 @@
                 socket.emit('docs', arg.toString()) // send string
                 console.log('create character send')
                 console.log(array)
-        }
-        //push data
-        function gendder() {for(var i=0; i<gender.length; i++) {if(document.getElementById(gender[i]).checked===true) {return document.getElementById(gender[i]).value}}}
-        function claas(){for(var i=0; i<clas.length; i++) {if(document.getElementById(clas[i]).checked===true) {return document.getElementById(clas[i]).value}}}
-        function boody() {for(var i=0; i<body.length; i++) {if(document.getElementById(body[i]).checked===true) {return document.getElementById(body[i]).value}}}
-        function nick() {return document.getElementById('username').value}
-        function password() {return document.getElementById('password').value}
+            }
+            //push data
+            function gendder() {return document.getElementById('gender').value}
+            function affin(){return document.getElementById('affinity').value}
+            function boody() {return document.getElementById('body').value}
+            function nick() {return document.getElementById('username').value}
+            function password() {return document.getElementById('password').value}
         }
         //end script
      </script>

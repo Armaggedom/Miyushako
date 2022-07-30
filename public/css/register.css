@@ -22,24 +22,24 @@ main form {
     flex-direction: column;
     align-items: center;
 }
-main form label {
-    display: flex;
-    flex-direction: column;
-}
-main form input {}
 .name {margin-right: 1vw;}
 .alignBox {
 	display: inline-table;
 	margin-right: 15%;
 }
-#inputarea {display: block;}
-.labelform {display: inline;}
-#title{text-align: center;}
-#line {
-	border-left: 6px dashed darkred;
-	height: 55vh;
-	top: 6vh;
+.selectform {
+	display: inline;
+	background: #000000;
+	color: #ffffff;
+	border-width: 3px;
+	border-radius: 18px;
+	border-color: #323232;
+	min-width: 150px;
+	height: 30px;
+	box-shadow: -7px -7px 0px #323232;
 }
+#inputarea {display: block;}
+#title{text-align: center;}
 #register label input {
 	margin-left: 10px;
 	background: #323232;
@@ -49,13 +49,14 @@ main form input {}
 	min-width: 150px;
 	height: 30px;
 }
-#register #button{
+#button{
 	margin-left: 10px;
 	margin-top: 10px;
 	background: #000000;
 	outline: none;
 	color: #ffffff;
 	border-radius: 18px;
+	border-color: #323232;
 	min-width: 150px;
 	height: 30px;
 }

@@ -1,8 +1,9 @@
 {
-	"name": "game",
-	"version": "1.0.0",
-	"description": "Game [Development]",
+	"name": "Miyushako",
+	"version": "0.2.2-2",
+	"description": "Miyushako, RPG game",
 	"main": "index.js",
+	"compatible": "PC | Mobile",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node index.js"
@@ -10,13 +11,13 @@
 	"author": "Bombbom",
 	"license": "ISC",
 	"dependencies": {
-		"dotenv": "^16.0.1",
 		"express": "^4.17.3",
 		"mysql2": "^2.3.3",
 		"sequelize": "^6.21.3",
 		"socket.io": "^4.5.1"
 	},
 	"devDependencies": {
+		"dotenv": "^16.0.1",
 		"nodemon": "^2.0.19"
 	}
 }

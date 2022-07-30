@@ -1,0 +1,15 @@
+html {
+	background-color: #000000;
+	color: #ffffff;
+}
+body nav ul li {
+	display: inline-block;
+	margin-right: 8vw;
+	border-left: 6px solid green;
+	border-bottom: 6px solid green;
+	background-color: violet;
+}
+body main {
+	border: 6px solid green;
+	background-color: violet;
+}
