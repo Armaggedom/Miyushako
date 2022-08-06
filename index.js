@@ -6,7 +6,7 @@
 * Credits
 * thanks Kashi for making our login screen design and helped in register optimization
 */
-const MiyuGamID=require('./public/GameName/modules/id.js')
+const MiyuGamID=require('./public/GameName/modules/Localid.js')
 const miyu=require('./models/miyu.js')
 const Profile=require('./models/profile.js')
 const express=require('express')

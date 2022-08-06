@@ -53,7 +53,6 @@
 - V:0.3.0:
     + sistema de movimentação pelo mapa (concluido)
     + Info Window (concluido)
-    continuação
 ```
 ---
 # Area do desenvolvedor
