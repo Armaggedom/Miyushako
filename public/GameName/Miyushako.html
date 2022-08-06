@@ -1,0 +1,156 @@
+<!-- 
+* antigo arquivo: Game.html
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+<!--     <meta http-equiv="refresh" content="1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/game.css">
+    <link rel="shortcut icon" href="#">
+    <script src="../socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+	<title>Development</title>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><h1>Miyushako</h1></li>
+            <li><h2 id="name">Name: [Loading]</h2></li>
+            <li><h2 id="affinity">Affinity: [Loading]</h2></li>
+            <li><h2 id="money">Money: [Loading]</h2></li>
+            <li><button id="info" onclick="UserInfoButton()">Info</button></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="AlphaBox">
+            <div>
+                <h1 id="locate"> You are in: [Loading]</h1>
+                <h2 id="MacroDescr">[Loading]</h2>
+                <h2 id="MicroDescr">[Loading]</h2>
+                <!-- <div id="line"></div> -->
+                <h2 id='moduleAction'>[Loading]</h2>
+                <div id="action"></div>
+            </div>
+        </div>
+        <div id="BetaBox">
+            <div>
+                <h1 id="nameInfo">Name: [Loading]</h1>
+                <h2 id="descriptionInfo">[Loading]</h2>
+            </div>
+        </div>
+        <!-- main div -->
+        <script>document.getElementById('BetaBox').style.visibility="collapse"</script>
+    </main>
+    <!-- connect to server -->
+    <script>
+        const user={
+            "username":localStorage.getItem('username'),
+            "password":localStorage.getItem('password'),
+        }
+        //-------
+        const socket=io();
+        socket.on('connect', ()=>{
+            socket.emit('requestData', user.username+','+'Info');
+            return socket.emit('storeClientInfo', {customId:user.username})
+        })
+        socket.emit('requestData', user.username+','+'locate');
+        // info: requests system=pos[0]=Requester, pos[1]=type and pos[2, 3, ...]= value
+        socket.on('reciveData', (data)=>{
+            console.log(data)
+            const mysplit=data.toString()
+            const array=mysplit.split(',')
+            if(array[0]=='Info') {InfoInput(array)}
+            if(array[0]=='locate') {LocateData(JSON.parse(array[1]+','+array[2]), array)}
+            if(array[0]=='InfoUser') {CollapseWindowInfoUser(array)}
+            if(array[0]=='RefreshData') {RefreshData()}
+        })
+        //request treat
+        function InfoInput(array) {
+            document.getElementById('name').innerHTML='Name: '+user.username
+            document.getElementById('affinity').innerHTML='Affinity: '+array[1]
+            document.getElementById('money').innerHTML='Money: '+array[2]
+        }
+        function LocateData(jsonData, array){
+            document.getElementById('locate').innerHTML='You are in: '+jsonData.Macro+' | '+jsonData.Micro
+            pushDataFromMapJSON(jsonData.Macro, jsonData.Micro /*modules*/)
+        }
+    </script>
+    <script>
+        //refresh
+        function RefreshData() {
+            window.location.reload()
+        }
+        // push data from JSON
+        function pushDataFromMapJSON(Macro, Micro /*modules*/) {
+            $(function() {
+                $.getJSON('./modules/data.json', function(data) {
+                    var linkerMacro=null
+                    var linkerMicro=null
+                    var action=null
+                    if(Macro=='Glorcimall') {
+                        linkerMacro=data.Glorcimall.description
+                        if(Micro=='north_gate') {
+                            linkerMicro=data.Glorcimall.north_gate.description
+                            action=data.Glorcimall.north_gate.next
+                        }
+                        if(Micro=='Small_guild_post') {
+                            linkerMicro=data.Glorcimall.Small_guild_post.description
+                            action=data.Glorcimall.Small_guild_post.next
+                        }
+                        if(Micro=='small_shopping_area') {
+                            linkerMicro=data.Glorcimall.small_shopping_area.description
+                            action=data.Glorcimall.small_shopping_area.next
+                        }
+                        if(Micro=='lowLevel_medical_post') {
+                            linkerMicro=data.Glorcimall.lowLevel_medical_post.description
+                            action=data.Glorcimall.lowLevel_medical_post.next
+                        }
+                        if(Micro=='east_gate') {
+                            linkerMicro=data.Glorcimall.east_gate.description
+                            action=data.Glorcimall.east_gate.next
+                        }
+                    }
+                    document.getElementById('MacroDescr').innerHTML=linkerMacro
+                    document.getElementById('MicroDescr').innerHTML=linkerMicro
+                    document.getElementById('moduleAction').innerHTML='places you can go'
+                    SendActionLocate(action) // set action locate
+                    function SendActionLocate(data) {
+                        const string=data.toString()
+                        const array=string.split(',')
+                        var textAction=null
+                        for(i=0; i<array.length; i++) {textAction+=array[i]+','}
+                        textAction=textAction.split('null').join(',').split(',')
+                        for(var i=1; i<textAction.length-1; i++){
+                            $('#action').append('<button value='+i+' id='+i+' onclick="ActionButtonOnClick(\''+i+','+document.getElementById('locate').innerHTML+'\')">'+textAction[i]+'</button>')
+                        }
+                    }
+                })
+            })
+        }
+        function ActionButtonOnClick(microMacroID) {
+            var array=microMacroID.toString()
+            array=array.split('|').join(',').split("You are in:").join(',').split(',')
+            socket.emit('locateJumper', user.username+','+array[2]+','+array[3]+','+array[0])
+        }
+        // Show and Hide User Info
+        function UserInfoButton() {
+            if(document.getElementById('BetaBox').style.visibility=="collapse") {
+                document.getElementById('BetaBox').style.visibility="visible"
+                CollapseWindowInfoUser(null)
+            }
+            else {document.getElementById('BetaBox').style.visibility="collapse"}
+        }
+        function CollapseWindowInfoUser(array) {
+            // need request data, all data
+            if(array==null) {socket.emit('requestData', user.username+','+'InfoUser')}
+            else {
+                // InfoUser structure: [<module>, <gender>, <affinity>, <bodyType>, <breed>]
+                document.getElementById('nameInfo').innerHTML='Name: '+user.username
+                document.getElementById('descriptionInfo').innerHTML='You are a '+array[3]+' '+array[1]+' '+array[4]+'\n'+'Your affinity is '+array[2]
+            }
+        }
+    </script>
+</body>
+</html>

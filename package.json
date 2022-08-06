@@ -1,6 +1,6 @@
 {
 	"name": "Miyushako",
-	"version": "0.2.2-2",
+	"version": "0.3.0-0",
 	"description": "Miyushako, RPG game",
 	"main": "index.js",
 	"compatible": "PC | Mobile",
@@ -8,7 +8,10 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "node index.js"
 	},
-	"author": "Bombbom",
+	"author": {
+		"PseudoName":"Bombbom",
+		"github":"https://github.com/Armaggedom"
+	},
 	"license": "ISC",
 	"dependencies": {
 		"express": "^4.17.3",

@@ -20,23 +20,45 @@
 (obs: o log está sendo datado com precisão após a versão 0.2.2build1)
 ```sh
 - V:0.0.1
-    - criação do projeto
-    - criação e finalização da página de registro
+    + criação do projeto
+    + criação e finalização da página de registro
 - V:0.1.0
-    - criação da página de login
+    + criação da página de login
 - V:0.2.0
-    - atualização e finalização da página de login
+    + atualização e finalização da página de login
 - V:0.2.1
-    - correção de bugs
+    = correção de bugs
 - V:0.2.2
-    - pequenas atualizações e correções
+    + pequenas atualizações e correções
 - V:0.2.2Build1:
-    - protótipo da página do jogo
+    + protótipo da página do jogo
 - V:0.2.2Build2:
-    - modificações e otmizações do código
+    = modificações e otmizações do código
+- V:0.2.2Build2.1:
+    = correção de bugs
+    = otmizações
+    + registro vai altomaticamente para o login ao criar um personagem
+    - sistema de classes
+    + sistema de afinidades
+    + data.js em build (apenas para desenvolvedores)
+    = recoloração da Miyushako.html
+    + mapa em build
+- V:0.2.2Build2.2: 
+    - data.js
+    + data.json (apenas para desenvolvedores)
+    + sistema de movimentação pelo mapa (build)
+    + Fravicon error solucionado (apenas para desenvolvedores)
+    + Info Window (build)
+    = layout editado
+- V:0.3.0:
+    + sistema de movimentação pelo mapa (concluido)
+    + Info Window (concluido)
+    continuação
 ```
 ---
 # Area do desenvolvedor
+## colaboradores
+> Kashi - Dev-suport/designer
 ## contato
 > ![Discord](https://img.shields.io/discord/997590312300072971?style=plastic)
 > [Discord Group](https://discord.gg/Pv3AuTbfyb) - DevMaster: `Miyu`

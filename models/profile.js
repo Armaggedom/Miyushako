@@ -14,12 +14,20 @@ const profile=db.define('profile', {
 		type: Sequelize.STRING,
 		allowNull: false
 	},
+	breed: {
+		type: Sequelize.STRING,
+		allowNull: false
+	},
 	gender: {
 		type: Sequelize.STRING,
 		allowNull: false
 	},
 	bodytype: {
 		type: Sequelize.STRING,
+		allowNull: false
+	},
+	locate: {
+		type: Sequelize.JSON,
 		allowNull: false
 	},
 	money: Sequelize.DECIMAL

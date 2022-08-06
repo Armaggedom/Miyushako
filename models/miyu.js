@@ -8,6 +8,6 @@ const mysql= {
 const Sequelize=require('sequelize')
 console.log()
 const sequelize= new Sequelize(mysql.name, mysql.user, mysql.password, {host: mysql.host, dialect: 'mysql'})
-sequelize.authenticate().then(function(){console.log('conectado')}).catch(function(erro){console.log('nao conectado: '+erro)})
+sequelize.authenticate().then(function(){console.log('database connected successfully')}).catch(function(erro){console.log('database not connected, Error: '+erro)})
 sequelize.sync({alter: true})
 module.exports=sequelize;

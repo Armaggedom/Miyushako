@@ -1,0 +1,36 @@
+{
+	"Glorcimall": {
+		"north_gate": {
+			"description":"You are at a small gate that leads to the north, where the central city is. Unfortunately, it is undergoing maintenance, not allowing its passage.",
+			"next":["small_shopping_area", "Small_guild_post"],
+			"id":[0, 1]
+		},
+		"Small_guild_post": {
+			"description":"You are in a small house written by the Maratoff guild, inside there are some novice adventurers looking for quests in exchange for a little money",
+			"next":["north_gate", "small_shopping_area", "lowLevel_medical_post", "east_gate"],
+			"id":[0, 1, 2, 3]
+		},
+		"small_shopping_area": {
+			"description":"You are in a small commercial zone, where you sell items and weapons, but apparently only of low levels",
+			"next":["Small_guild_post", "north_gate", "lowLevel_medical_post", "east_gate"],
+			"id":[0, 1, 2, 3]
+		},
+		"lowLevel_medical_post": {
+			"description":"You're in a medical post, it probably heals physical wounds, more than necessary for a village this small.",
+			"next":["Small_guild_post", "small_shopping_area", "east_gate"],
+			"id":[0, 1, 2]
+		},
+		"east_gate": {
+			"description":"You are at a small gate that leads to the east, where the A zone road is. Unfortunately, due to an accident by a guard, the gate is burned with new barricades, preventing the passage.",
+			"next":["Small_guild_post", "small_shopping_area", "lowLevel_medical_post"],
+			"id":[0, 1, 2]
+		},
+		"description":"Glorcimall is a village forgotten in time, abandoned by the kingdom. A poor province that cries out for a miracle."
+	},
+	"UserDescr": {
+		"descrOne":"you are a",
+		"breed":[
+			"human"
+		]
+	}
+}

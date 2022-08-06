@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
     <link rel="stylesheet" href="./css/login.css">
+    <link rel="shortcut icon" href="#">
+    <title>Login</title>
 </head>
 <body>
     <main>
@@ -35,7 +36,6 @@
         </form>
     </main>
     <section class="images">
-        <!-- <img src="assets/mobile.svg" alt="Mobile"> -->
         <div class="circle"></div>
     </section>
     <script>
@@ -52,11 +52,11 @@
         socket.on('loginReply', (args)=>{
             if(args=='dennied') {alert('usuário ou senha incorreta')}
             else if(args=='granted') {
-                alert('login efetuado')
                 var username=document.querySelector('#username').value
                 var password=document.querySelector('#password').value
                 localStorage.setItem('username', username)
                 localStorage.setItem('password', password)
+                window.location.replace('./GameName/Miyushako.html')
             }
             else {alert('error undefined')}
         })
