@@ -37,7 +37,6 @@ io.on("connection", socket => {
 		//create profile
 		var initPos=null;
 		if(array[5]=='Human') {initPos=JSON.stringify(initialProvinceHuman)}
-		//else{return console.log('error')}
 		const newPlayer=Profile.create({
 			gender: array[0],
 		 	affinity: array[1],
@@ -93,7 +92,6 @@ async function editMiyu(name, request, value, socket) {
 	const user=await Profile.findByPk(name)
 	const mysplit=value.toString()
 	const array=mysplit.split(',')	
-	console.log(array)
 	if(request=='locateEdit') {
 		const ProvinceChange={
 		 	"Macro":array[0],
